@@ -1,0 +1,53 @@
+
+<apex:page 
+controller="ABC_OrderListController"
+applyHtmlTag="false" 
+showHeader="false"
+applyBodyTag="false"
+>  
+
+<span style="float: right">
+  <apex:image value="{!URLFOR($Resource.ABC_Pharmacy)}"
+    width="68"
+    height="68"
+  />
+
+</span>
+   
+    <apex:pageBlock title="WareHouse Orders">
+        <apex:repeat value="{!orders}" var="order">
+            <apex:pageBlockSection title="{!order.OrderNumber}">
+             
+               <apex:facet name="header" >
+                
+                <apex:outputPanel>
+                  <apex:image url= "{!orderIconMap[order]}" />
+                  {!order.OrderNumber} - {!order.Status}  - {!order.EffectiveDate}
+                </apex:outputPanel>
+
+               </apex:facet>
+            
+              <apex:pageBlockSectionItem>
+                    <tr>
+                     <td>
+                       Product 
+                     </td>
+                     <td>
+                      Quantity 
+                     </td>
+                     <td>
+                      UnitPrice 
+                     </td>
+                    </tr>
+                    <apex:repeat value="{!orderItemsMap[order]}" var="orderItem">
+                     <tr>
+                       <td>{!orderItem.Product2.Name} </td>
+                       <td>{!orderItem.Quantity} </td>
+                       <td>{!orderItem.UnitPrice}</td> 
+                      </tr>
+                    </apex:repeat>
+              </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:repeat>
+    </apex:pageBlock>
+</apex:page>
